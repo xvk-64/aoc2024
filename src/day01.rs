@@ -4,12 +4,12 @@ use std::path::Path;
 
 fn main() {
     let file_path = Path::new("inputs/day01.txt");
-    let contents = fs::read_to_string(file_path);
+    let contents = fs::read_to_string(file_path).unwrap();
 
     let mut list1: Vec<i32> = Vec::new();
     let mut list2: Vec<i32> = Vec::new();
 
-    for line in contents.unwrap().split("\n") {
+    for line in contents.lines() {
         let split: Vec<&str> = line.split_whitespace().collect();
 
         if split.len() != 2 {break;}
@@ -33,6 +33,6 @@ fn main() {
     let similarity = list1.iter().map(|elem| {
         elem * (counts.get(&elem).unwrap_or(&0))
     }).sum::<i32>();
-    
+
     println!("Part 2: Similarity: {}", similarity);
 }
